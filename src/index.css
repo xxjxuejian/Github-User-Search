@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Space Mono", monospace;
+  @apply bg-lm-bg text-lm-text transition-colors duration-300;
+}
+
+/* 当父元素有 .dark 类时，应用深色背景 */
+.dark body {
+  @apply bg-dm-bg text-dm-text;
+}
+/* 抽一个语义化工具类 */
+@layer components {
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
