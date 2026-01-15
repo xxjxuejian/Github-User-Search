@@ -14,8 +14,12 @@ const Search: React.FC<SearchProps> = ({ onSearch, error }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full mb-6">
-      <div className="flex-between w-full p-2 rounded-[15px] bg-lm-bg-content dark:bg-dm-bg-content shadow-lg transition-colors">
+    <form onSubmit={handleSubmit} className="relative w-full mb-6 ">
+      <div
+        className="flex-between w-full p-2 rounded-[15px] bg-lm-bg-content dark:bg-dm-bg-content shadow-lg transition-colors
+      focus-within:border-primary border border-transparent
+      "
+      >
         {/* 图标 */}
         <div className="pl-4 text-primary md:pl-8">
           <SvgIcon name="search" size={24} />
@@ -35,6 +39,14 @@ const Search: React.FC<SearchProps> = ({ onSearch, error }) => {
           </span>
         )}
         {/* 按钮 */}
+        <button
+          type="submit"
+          className="bg-primary hidden md:block hover:bg-[#60ABFF] text-white font-bold py-3 px-4 md:py-3 md:px-6 rounded-xl transition-colors text-[14px] md:text-[16px]"
+        >
+          Search
+        </button>
+      </div>
+      <div className="mt-4 flex-center md:hidden">
         <button
           type="submit"
           className="bg-primary hover:bg-[#60ABFF] text-white font-bold py-3 px-4 md:py-3 md:px-6 rounded-xl transition-colors text-[14px] md:text-[16px]"
