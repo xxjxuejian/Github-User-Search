@@ -18,6 +18,14 @@ const formatDate = (isoString: string) => {
 };
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
+  // 链接不可点击时的样式
+  const disabledLinkStyle = (text: string | null) => {
+    if (!text) {
+      return " opacity-50";
+    }
+    return "";
+  };
+
   return (
     <div className="w-full p-6 transition-colors shadow-lg bg-lm-bg-content dark:bg-dm-bg-content rounded-2xl lg:flex lg:gap-x-8">
       <div className="rounded-full overflow-hidden w-[117px] h-[117px] hidden lg:block shrink-0 ">
@@ -33,14 +41,14 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
               className="w-full h-full"
             />
           </div>
-          <div className="flex flex-col w-full lg:flex-row lg:justify-between ">
+          <div className="flex flex-col flex-1 lg:flex-row lg:justify-between ">
             <div>
               {/* 字体大小，颜色、 */}
               <h2 className="text-base font-bold md:text-2xl text-lm-text-alt dark:text-dm-text">
                 {user.name || user.login}
               </h2>
               <a
-                href=""
+                href={user.html_url}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-1 text-sm md:text-base text-primary hover:underline"
@@ -56,7 +64,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
 
         {/* --- Bio --- */}
         <div className="mb-6 lg:mb-8">
-          <p className="text-sm md:text-base text-lm-text dark:text-dm-text leading-[25px]">
+          <p className="text-sm md:text-base text-lm-text dark:text-dm-text leading-[25px] whitespace-pre-wrap">
             {user.bio || "This profile has no bio"}
           </p>
         </div>
@@ -92,27 +100,53 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         {/* --- Links Footer (Flex Wrap Layout) --- */}
         <div className="flex flex-col text-sm gap-y-4 text-lm-text dark:text-dm-text md:flex-row md:flex-wrap">
           {/* Location */}
-          <div className="flex items-center gap-4 md:w-1/2">
-            {/* 需要通过tailwind 调整图标大小，目前没实现 */}
-            <SvgIcon name="location" size={24} />
+          <div
+            className={
+              "flex items-center gap-4 md:w-1/2" +
+              disabledLinkStyle(user.location)
+            }
+          >
+            <SvgIcon name="location" className="w-5 h-5 md:w-6 md:h-6" />
             <span className="truncate">
               {user.location ? user.location : "Not Available"}
             </span>
           </div>
-          <div className="flex items-center gap-4 md:w-1/2">
-            <SvgIcon name="link" size={24} />
-            <a href="#" target="_blank" className="truncate hover:underline">
-              {user.blog ? user.blog : "Not Available"}
-            </a>
+          <div
+            className={
+              "flex items-center gap-4 md:w-1/2" + disabledLinkStyle(user.blog)
+            }
+          >
+            <SvgIcon name="link" className="w-5 h-5 md:w-6 md:h-6" />
+            {user.blog ? (
+              <a
+                href={user.blog}
+                target="_blank"
+                rel="noreferrer"
+                className="truncate hover:underline"
+              >
+                {user.blog}
+              </a>
+            ) : (
+              <span>Not Available</span>
+            )}
           </div>
-          <div className="flex items-center gap-4 md:w-1/2">
-            <SvgIcon name="twitter" size={24} />
-            <a href="#" target="_blank" className="truncate hover:underline">
+          <div
+            className={
+              "flex items-center gap-4 md:w-1/2" +
+              disabledLinkStyle(user.twitter_username)
+            }
+          >
+            <SvgIcon name="twitter" className="w-5 h-5 md:w-6 md:h-6" />
+            <span className="truncate">
               {user.twitter_username ? user.twitter_username : "Not Available"}
-            </a>
+            </span>
           </div>
-          <div className="flex items-center gap-4 md:w-1/2">
-            <SvgIcon name="building" size={24} className="" />
+          <div
+            className={`flex items-center gap-4 md:w-1/2 ${disabledLinkStyle(
+              user.company
+            )}`}
+          >
+            <SvgIcon name="building" className="w-5 h-5 md:w-6 md:h-6" />
             <span className="truncate">
               {user.company ? user.company : "Not Available"}
             </span>

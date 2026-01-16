@@ -17,9 +17,9 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       >
         {theme === "light" ? "DARK" : "LIGHT"}
         {theme === "light" ? (
-          <SvgIcon name="moon" size={20} />
+          <SvgIcon name="moon" className="w-5 h-5 md:w-6 md:h-6" />
         ) : (
-          <SvgIcon name="sun" size={20} />
+          <SvgIcon name="sun" className="w-5 h-5 md:w-6 md:h-6" />
         )}
       </button>
     </header>

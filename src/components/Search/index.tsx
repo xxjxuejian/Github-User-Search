@@ -22,7 +22,7 @@ const Search: React.FC<SearchProps> = ({ onSearch, error }) => {
       >
         {/* 图标 */}
         <div className="pl-4 text-primary md:pl-8">
-          <SvgIcon name="search" size={24} />
+          <SvgIcon name="search" className="w-5 h-5 md:w-6 md:h-6" />
         </div>
         {/* 输入框 */}
         <input
@@ -34,7 +34,7 @@ const Search: React.FC<SearchProps> = ({ onSearch, error }) => {
         />
         {/* 错误信息 */}
         {error && (
-          <span className="absolute right-[110px] text-[#F74646] font-bold text-[15px] hidden md:block">
+          <span className="absolute right-10 md:right-[140px] text-[#F74646] font-bold text-sm md:text-base md:block">
             No results
           </span>
         )}
